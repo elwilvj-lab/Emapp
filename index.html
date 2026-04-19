@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gymnastics App</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f4f6f9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.container {
+  width: 100%;
+  max-width: 500px;
+  padding: 20px;
+}
+
+.title {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.title h1 {
+  margin: 0;
+}
+
+.menu {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.menu button {
+  padding: 18px;
+  font-size: 20px;
+  border: none;
+  border-radius: 10px;
+  background: #1f6feb;
+  color: white;
+  cursor: pointer;
+}
+
+.menu button:hover {
+  background: #174ea6;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <div class="title">
+    <h1>Gymnastics App</h1>
+  </div>
+
+  <div class="menu">
+
+    <button onclick="go('new-event.html')">
+      New Event
+    </button>
+
+    <button onclick="go('register.html')">
+      Register
+    </button>
+
+    <button onclick="go('landing.html')">
+      Score
+    </button>
+
+    <button onclick="go('scoreboard.html')">
+      Score Board
+    </button>
+
+  </div>
+
+</div>
+
+<script>
+function go(page) {
+  window.location.href = page;
+}
+</script>
+
+</body>
+</html>
