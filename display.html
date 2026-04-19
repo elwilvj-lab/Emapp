@@ -2,8 +2,18 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+  />
   <title>Display Score</title>
+
+  <!-- iPad / mobile app-like -->
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="theme-color" content="#000000" />
+
   <style>
     html, body {
       margin: 0;
@@ -12,32 +22,39 @@
       overflow: hidden;
       background: #000;
       font-family: Arial, sans-serif;
+      touch-action: manipulation;
     }
 
     body {
       display: flex;
       flex-direction: column;
+      justify-content: space-between;
+      -webkit-user-select: none;
+      user-select: none;
     }
 
-    .score-wrap {
+    .display-wrap {
       flex: 1;
       display: flex;
       align-items: center;
       justify-content: center;
+      overflow: hidden;
+      background: #000;
     }
 
-    #score {
-      color: #fff;
-      font-weight: bold;
-      line-height: 1;
-      font-size: 38vw; /* MAX BIG */
-      text-align: center;
-      user-select: none;
+    /* SVG acts like one fixed graphic */
+    #scoreSvg {
+      width: 100vw;
+      height: calc(100vh - 58px);
+      display: block;
+      background: #000;
     }
 
     .bottom-bar {
-      height: 60px;
+      height: 58px;
+      min-height: 58px;
       display: flex;
+      background: #1f6feb;
     }
 
     .enter-btn {
@@ -46,18 +63,35 @@
       background: #1f6feb;
       color: #fff;
       font-size: 18px;
+      letter-spacing: 0.03em;
       cursor: pointer;
+    }
+
+    .enter-btn:active {
+      background: #174ea6;
     }
   </style>
 </head>
 <body>
 
-  <div class="score-wrap">
-    <div id="score">0.00</div>
+  <div class="display-wrap">
+    <svg id="scoreSvg" viewBox="0 0 1000 700" preserveAspectRatio="xMidYMid meet">
+      <rect x="0" y="0" width="1000" height="700" fill="#000000"></rect>
+      <text
+        id="scoreText"
+        x="500"
+        y="390"
+        text-anchor="middle"
+        fill="#f2f2f2"
+        font-family="Arial, sans-serif"
+        font-size="360"
+        font-weight="700"
+      >0.00</text>
+    </svg>
   </div>
 
   <div class="bottom-bar">
-    <button class="enter-btn" onclick="next()">ENTER</button>
+    <button id="enterBtn" class="enter-btn">ENTER</button>
   </div>
 
   <script src="display.js"></script>
