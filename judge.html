@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Judge Scoring</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<div class="app">
+
+  <div class="header">
+    <h1>Judge Scoring</h1>
+    <p id="eventTitle">Artistic Girls L1-L3 | 2026-04-18</p>
+    <div class="context" id="contextText">Girls | Level 1 | Vault | Group D</div>
+  </div>
+
+  <div class="card selectors">
+    <label>
+      Level
+      <select id="levelSelect">
+        <option value="Level 1" selected>Level 1</option>
+        <option value="Level 2">Level 2</option>
+        <option value="Level 3">Level 3</option>
+      </select>
+    </label>
+
+    <label>
+      Group
+      <select id="groupSelect">
+        <option value="Group A">Group A</option>
+        <option value="Group B">Group B</option>
+        <option value="Group C">Group C</option>
+        <option value="Group D" selected>Group D</option>
+      </select>
+    </label>
+  </div>
+
+  <table class="score-table">
+    <thead>
+      <tr>
+        <th>Entry</th>
+        <th>Name</th>
+        <th>Level</th>
+        <th>Score</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody id="tableBody"></tbody>
+  </table>
+
+</div>
+
+<script src="judge.js"></script>
+</body>
+</html>

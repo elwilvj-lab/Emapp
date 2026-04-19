@@ -1,0 +1,15 @@
+{
+  "groups": [
+    {
+      "gender": "Girls",
+      "level": "Level 1",
+      "apparatus": "Vault",
+      "group": "Group D",
+      "gymnasts": [
+        { "entry": "D01", "name": "KARMENIQUE HUNTER", "active": true },
+        { "entry": "D02", "name": "JANE DOE", "active": false },
+        { "entry": "D03", "name": "SARAH SMITH", "active": true }
+      ]
+    }
+  ]
+}

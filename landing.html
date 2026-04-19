@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Judge Landing</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app">
+    <header class="header">
+      <h1>Judge Scoring</h1>
+      <p>Artistic Girls L1-L3 | 2026-04-18</p>
+      <div class="context">Select score sheet</div>
+    </header>
+
+    <section class="selectors card">
+      <label>
+        Gender
+        <select id="genderSelect">
+          <option value="Girls" selected>Girls</option>
+          <option value="Boys">Boys</option>
+        </select>
+      </label>
+
+      <label>
+        Level
+        <select id="levelSelect">
+          <option value="Level 1" selected>Level 1</option>
+          <option value="Level 2">Level 2</option>
+          <option value="Level 3">Level 3</option>
+          <option value="Level 4">Level 4</option>
+          <option value="Level 5">Level 5</option>
+          <option value="Level 6">Level 6</option>
+          <option value="Fun Gym">Fun Gym</option>
+        </select>
+      </label>
+
+      <label>
+        Apparatus
+        <select id="apparatusSelect">
+          <option value="Vault" selected>Vault</option>
+          <option value="Bars">Bars</option>
+          <option value="Beam">Beam</option>
+          <option value="Floor">Floor</option>
+          <option value="H_Bar">H_Bar</option>
+          <option value="P_Bars">P_Bars</option>
+          <option value="Pommel">Pommel</option>
+          <option value="Mushroom">Mushroom</option>
+          <option value="DM">DM</option>
+          <option value="Euro">Euro</option>
+        </select>
+      </label>
+
+      <label>
+        Group
+        <select id="groupSelect">
+          <option value="Group A">Group A</option>
+          <option value="Group B">Group B</option>
+          <option value="Group C">Group C</option>
+          <option value="Group D" selected>Group D</option>
+          <option value="Group E">Group E</option>
+          <option value="Group F">Group F</option>
+          <option value="Group G">Group G</option>
+        </select>
+      </label>
+    </section>
+
+    <footer class="footer">
+      <button id="openBtn" class="primary">Open Score Sheet</button>
+    </footer>
+  </div>
+
+  <script src="landing.js"></script>
+</body>
+</html>
