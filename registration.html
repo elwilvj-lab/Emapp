@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registration</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="page-wrap">
+    <div class="top-header">
+      <img src="logo.png" class="top-logo" alt="Emfuleni Gymnastics">
+      <h1>Registration</h1>
+      <p>Manage Gymnasts</p>
+    </div>
+
+    <div class="card reg-top">
+      <select id="eventSelect">
+        <option>Event 1</option>
+        <option selected>Event 2</option>
+      </select>
+
+      <div class="search-wrap">
+  <input type="text" id="searchBox" placeholder="Search name / entry...">
+  <button type="button" id="clearSearch" onclick="clearSearch()">✖</button>
+</div>
+
+      <button type="button" onclick="addNew()">+ Add</button>
+    </div>
+
+    <div id="grid" class="reg-grid"></div>
+
+    <div class="card reg-editor hidden" id="editor">
+      <h3>Edit Gymnast</h3>
+
+      <div class="editor-row">
+        <label>
+          Entry
+          <input id="editEntry" type="text">
+        </label>
+
+        <label>
+          Name
+          <input id="editName" type="text">
+        </label>
+      </div>
+
+      <button type="button" class="primary" onclick="saveEdit()">Save</button>
+    </div>
+  </div>
+
+  <script src="registration.js"></script>
+</body>
+</html>

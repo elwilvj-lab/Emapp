@@ -1,10 +1,62 @@
+/* =========================
+   BASE
+   ========================= */
 body {
   margin: 0;
   font-family: Arial, sans-serif;
-  background: #f4f6f8;
+  background: #f5f6f8;
   color: #222;
+  position: relative;
 }
 
+/* soft watermark */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: url("logo.png") center center / 45% no-repeat;
+  opacity: 0.06;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.page-wrap {
+  position: relative;
+  z-index: 1;
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 16px;
+}
+
+/* =========================
+   TOP HEADER / LOGO
+   ========================= */
+.top-header {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.top-logo {
+  max-width: 280px;
+  width: 80%;
+  height: auto;
+  margin-bottom: 10px;
+}
+
+.top-header h1 {
+  margin: 0;
+  font-size: 28px;
+}
+
+.top-header p {
+  margin: 6px 0 0 0;
+  font-size: 15px;
+  color: #555;
+}
+
+/* =========================
+   APP / CARDS
+   ========================= */
 .app {
   max-width: 760px;
   margin: 0 auto;
@@ -17,6 +69,7 @@ body {
   padding: 16px;
   border-radius: 12px;
   margin-bottom: 16px;
+  box-sizing: border-box;
 }
 
 .header h1 {
@@ -29,6 +82,49 @@ body {
   font-weight: bold;
 }
 
+/* =========================
+   INDEX / MENU
+   ========================= */
+.container {
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.title {
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.title h1 {
+  margin: 0;
+  font-size: 32px;
+}
+
+.menu {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.menu button {
+  padding: 18px;
+  font-size: 20px;
+  border: none;
+  border-radius: 10px;
+  background: #1f6feb;
+  color: white;
+  cursor: pointer;
+  width: 100%;
+}
+
+.menu button:hover {
+  background: #174ea6;
+}
+
+/* =========================
+   SELECTORS
+   ========================= */
 .selectors {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -46,8 +142,13 @@ select {
   padding: 12px;
   font-size: 16px;
   border-radius: 8px;
+  border: 1px solid #ccc;
+  background: white;
 }
 
+/* =========================
+   TABLE
+   ========================= */
 .score-table {
   width: 100%;
   border-collapse: collapse;
@@ -61,8 +162,17 @@ select {
   padding: 12px;
   border-bottom: 1px solid #ddd;
   text-align: left;
+  vertical-align: middle;
 }
 
+.level-cell {
+  color: #555;
+  white-space: nowrap;
+}
+
+/* =========================
+   SCORE CONTROLS
+   ========================= */
 .score-controls {
   display: flex;
   gap: 6px;
@@ -74,6 +184,9 @@ select {
   padding: 8px;
   text-align: center;
   font-size: 16px;
+  border: 1px solid #bbb;
+  border-radius: 6px;
+  box-sizing: border-box;
 }
 
 .adjust-btn {
@@ -81,18 +194,64 @@ select {
   height: 44px;
   font-size: 20px;
   font-weight: bold;
+  border: 1px solid #333;
+  border-radius: 0;
+  cursor: pointer;
 }
 
+.adjust-btn.big {
+  background: #444;
+  color: white;
+  width: 50px;
+}
+
+.adjust-btn.small {
+  background: #ddd;
+  color: #000;
+  width: 44px;
+}
+
+.show-btn {
+  font-size: 22px;
+  padding: 14px 18px;
+  border: none;
+  border-radius: 10px;
+  background: #1f6feb;
+  color: white;
+  cursor: pointer;
+}
+
+.show-btn:disabled,
+.adjust-btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+/* =========================
+   DNC / DONE STATES
+   ========================= */
 .dnc {
-  color: #888;
+  color: #999;
   text-decoration: line-through;
 }
 
-.level-cell {
-  color: #555;
-  white-space: nowrap;
+.dnc-input {
+  background: #f1f1f1;
+  color: transparent;
+  border-color: #ddd;
 }
 
+.row-dnc {
+  opacity: 0.65;
+}
+
+.row-done {
+  background: #eaf7ea;
+}
+
+/* =========================
+   BUTTON AREAS
+   ========================= */
 .footer,
 .top-actions {
   margin-top: 16px;
@@ -119,7 +278,99 @@ select {
   color: #111;
 }
 
+.save-back-btn {
+  background: #1f6feb;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 14px 18px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+/* =========================
+   JUDGE / DISPLAY PAGE
+   ========================= */
+.hidden {
+  display: none;
+}
+
+.judge-container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: center;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.judge-header {
+  font-size: 20px;
+  line-height: 1.4;
+}
+
+.judge-score {
+  font-size: 120px;
+  text-align: center;
+  border: none;
+  outline: none;
+}
+
+.judge-score-small {
+  font-size: 60px;
+  text-align: center;
+  border: none;
+  outline: none;
+  margin-top: 40px;
+}
+
+.enter-btn {
+  font-size: 30px;
+  padding: 20px;
+  border: none;
+  background: #1f6feb;
+  color: white;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.display-screen {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: center;
+  background: #ffffff;
+}
+
+.big-score {
+  font-size: 22vw;
+  font-weight: bold;
+  margin-top: 25vh;
+  letter-spacing: 5px;
+}
+
+.enter-small {
+  font-size: 16px;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: none;
+  border-radius: 8px;
+  background: #1f6feb;
+  color: white;
+  cursor: pointer;
+}
+
+/* =========================
+   MOBILE
+   ========================= */
 @media (max-width: 640px) {
+  .page-wrap,
+  .app {
+    padding: 12px;
+  }
+
   .selectors {
     grid-template-columns: 1fr;
   }
@@ -133,138 +384,186 @@ select {
   .score-input {
     width: 70px;
   }
+
+  .top-logo {
+    max-width: 220px;
+  }
+
+  .top-header h1 {
+    font-size: 24px;
+  }
+
+  .title h1 {
+    font-size: 28px;
+  }
+
+  .menu button {
+    font-size: 18px;
+    padding: 16px;
+  }
 }
 
-.judge-container {
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  text-align: center;
-  padding: 20px;
-}
-
-.judge-header {
-  font-size: 24px;
-}
-
-.judge-score {
-  font-size: 120px;
-  text-align: center;
-  border: none;
-  outline: none;
-}
-
-.enter-btn {
-  font-size: 30px;
-  padding: 20px;
-  border: none;
-  background: #1f6feb;
-  color: white;
-  border-radius: 10px;
-}
 /* =========================
-   JUDGE SHOW / DISPLAY MODE
+   REGISTRATION PAGE
    ========================= */
 
 .hidden {
   display: none;
 }
 
-/* INPUT SCREEN (small typing mode) */
-.judge-score-small {
-  font-size: 60px;
-  text-align: center;
-  border: none;
-  outline: none;
-  margin-top: 40px;
+.reg-top {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-items: center;
 }
 
-/* SHOW button (medium) */
-.show-btn {
-  font-size: 22px;
-  padding: 14px;
-  margin-top: 30px;
+.reg-top input,
+.reg-top select,
+.reg-top button {
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 8px;
+}
+
+.reg-top input,
+.reg-top select {
+  border: 1px solid #ccc;
+  background: white;
+}
+
+.reg-top button {
   border: none;
-  border-radius: 10px;
   background: #1f6feb;
   color: white;
+  cursor: pointer;
 }
 
-/* FULL SCREEN DISPLAY */
-.display-screen {
-  height: 100vh;
+.reg-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.reg-cell {
+  position: relative;
+  background: white;
+  border: 2px solid transparent;
+  border-radius: 10px;
+  padding: 12px;
+  min-height: 70px;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+.reg-cell:hover {
+  border-color: #1f6feb;
+}
+
+.reg-cell.present {
+  background: #dff5e3;
+  border: 2px solid #16a34a;
+}
+
+.reg-cell.inactive {
+  opacity: 0.4;
+  filter: grayscale(0.2);
+}
+
+.reg-cell.selected {
+  border: 2px solid #2563eb;
+}
+
+.reg-checkbox {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+}
+
+.reg-checkbox input {
+  width: 22px;
+  height: 22px;
+  cursor: pointer;
+}
+
+.reg-entry {
+  font-weight: bold;
+  margin-bottom: 6px;
+  padding-right: 28px;
+}
+
+.reg-name {
+  font-size: 15px;
+  line-height: 1.3;
+}
+
+.reg-meta {
+  margin-top: 6px;
+  font-size: 14px;
+  color: #555;
+}
+
+.reg-editor {
+  margin-top: 16px;
+}
+
+.editor-row {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+}
+
+.editor-row label {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  text-align: center;
-  background: #ffffff;
+  gap: 6px;
 }
 
-/* BIG SCORE (flip board style) */
-.big-score {
-  font-size: 22vw; /* scales with screen */
-  font-weight: bold;
-  margin-top: 25vh;
-  letter-spacing: 5px;
-}
-
-/* Small ENTER button */
-.enter-small {
-  font-size: 16px;
+.editor-row input[type="text"] {
   padding: 10px;
-  margin-bottom: 20px;
-  border: none;
+  font-size: 16px;
+  border: 1px solid #ccc;
   border-radius: 8px;
-  background: #1f6feb;
-  color: white;
+  min-width: 180px;
 }
 
-/* Header slightly smaller in judge mode */
-.judge-header {
-  font-size: 20px;
-  line-height: 1.4;
+@media (max-width: 640px) {
+  .reg-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .editor-row {
+    flex-direction: column;
+  }
+
+  .editor-row input[type="text"] {
+    min-width: 100%;
+    box-sizing: border-box;
+  }
+}
+.search-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
 }
 
-.adjust-btn.big {
-  background: #444;
-  color: white;
-  width: 50px;
+.search-wrap input {
+  padding-right: 35px;
 }
 
-.adjust-btn.small {
-  background: #ddd;
-  width: 44px;
+#clearSearch {
+  position: absolute;
+  right: 8px;
+  border: none;
+  background: transparent;
+  font-size: 18px;
+  cursor: pointer;
+  color: #888;
+  display: none;
 }
 
-.dnc {
-  color: #999;
-  text-decoration: line-through;
-}
-
-.dnc-input {
-  background: #f1f1f1;
-  color: transparent;
-  border-color: #ddd;
-}
-.score-table tr:has(.dnc) {
-  opacity: 0.7;
-}
-.dnc {
-  color: #999;
-  text-decoration: line-through;
-}
-
-.dnc-input {
-  background: #f1f1f1;
-  color: transparent;
-  border-color: #ddd;
-}
-
-.row-dnc {
-  opacity: 0.65;
-}
-
-.row-done {
-  background: #eaf7ea;
+#clearSearch:hover {
+  color: #000;
 }

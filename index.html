@@ -1,97 +1,140 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Gymnastics App</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Emfuleni Gymnastics</title>
 
-<style>
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: #f4f6f9;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-}
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f5f6f8;
+      color: #222;
+      position: relative;
+    }
 
-.container {
-  width: 100%;
-  max-width: 500px;
-  padding: 20px;
-}
+    /* soft watermark */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background: url("logo.png") center center / 40% no-repeat;
+      opacity: 0.05;
+      pointer-events: none;
+      z-index: 0;
+    }
 
-.title {
-  text-align: center;
-  margin-bottom: 30px;
-}
+    .page-wrap {
+      position: relative;
+      z-index: 1;
+      max-width: 600px;
+      margin: auto;
+      padding: 20px;
+    }
 
-.title h1 {
-  margin: 0;
-}
+    /* ================= HEADER ================= */
+    .top-header {
+      text-align: center;
+      margin-bottom: 25px;
+    }
 
-.menu {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-}
+    .top-logo {
+      max-width: 260px;
+      width: 80%;
+      height: auto;
+      margin-bottom: 10px;
+    }
 
-.menu button {
-  padding: 18px;
-  font-size: 20px;
-  border: none;
-  border-radius: 10px;
-  background: #1f6feb;
-  color: white;
-  cursor: pointer;
-}
+    .top-header h1 {
+      margin: 0;
+      font-size: 26px;
+    }
 
-.menu button:hover {
-  background: #174ea6;
-}
-</style>
+    .top-header p {
+      margin: 5px 0 0 0;
+      font-size: 14px;
+      color: #555;
+    }
+
+    /* ================= TITLE ================= */
+    .title {
+      text-align: center;
+      margin-bottom: 25px;
+    }
+
+    .title h1 {
+      margin: 0;
+      font-size: 30px;
+    }
+
+    /* ================= MENU ================= */
+    .menu {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .menu button {
+      padding: 18px;
+      font-size: 20px;
+      border: none;
+      border-radius: 10px;
+      background: #1f6feb;
+      color: white;
+      cursor: pointer;
+      width: 100%;
+    }
+
+    .menu button:hover {
+      background: #174ea6;
+    }
+
+    @media (max-width: 640px) {
+      .top-logo {
+        max-width: 200px;
+      }
+
+      .title h1 {
+        font-size: 26px;
+      }
+
+      .menu button {
+        font-size: 18px;
+        padding: 16px;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
-<div class="container">
+  <div class="page-wrap">
 
-  <div class="title">
-    <h1>Gymnastics App</h1>
-  </div>
+    <!-- LOGO TOP CENTER -->
+    <div class="top-header">
+      <img src="logo.png" class="top-logo" alt="Emfuleni Gymnastics">
+      <h1>Emfuleni Gymnastics</h1>
+      <p>Judging System</p>
+    </div>
 
-  <div class="menu">
-
-    <button onclick="go('new-event.html')">
-      New Event
-    </button>
-
-    <button onclick="go('registration.html')">
-      Registration
-    </button>
-
-    <button onclick="go('landing.html')">
-      Score
-    </button>
-
-    <button onclick="go('scoreboard.html')">
-      Score Board
-    </button>
-
-    <button onclick="go('admin.html')">
-      Admin
-    </button>
+    
+    <!-- MENU -->
+    <div class="menu">
+      <button onclick="go('new-event.html')">New Event</button>
+      <button onclick="go('registration.html')">Registration</button>
+      <button onclick="go('landing.html')">Score</button>
+      <button onclick="go('scoreboard.html')">Score Board</button>
+      <button onclick="go('admin.html')">Admin</button>
+    </div>
 
   </div>
 
-</div>
-
-<script>
-function go(page) {
-  window.location.href = page;
-}
-</script>
+  <script>
+    function go(page) {
+      window.location.href = page;
+    }
+  </script>
 
 </body>
 </html>

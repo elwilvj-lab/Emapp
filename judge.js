@@ -274,3 +274,58 @@ function focusNextGymnast() {
     }
   }, 50);
 }
+function saveAndBack() {
+  saveStateToLocalStorage();
+
+  const sessionKey = `${gender}|${levelFromUrl}|${apparatus}|${groupFromUrl}`;
+
+  const finalResults = {
+    gender,
+    level: levelFromUrl,
+    apparatus,
+    group: groupFromUrl,
+    savedAt: new Date().toISOString(),
+    gymnasts: gymnasts.map(g => ({
+      entry: g.entry,
+      name: g.name,
+      level: g.level,
+      score: g.score,
+      active: g.active,
+      done: g.done
+    }))
+  };
+
+  localStorage.setItem(`finalResults:${sessionKey}`, JSON.stringify(finalResults));
+
+  let allSessions = [];
+  try {
+    allSessions = JSON.parse(localStorage.getItem("allFinalResults") || "[]");
+  } catch (err) {
+    allSessions = [];
+  }
+
+  const existingIndex = allSessions.findIndex(x =>
+    x.gender === gender &&
+    x.level === levelFromUrl &&
+    x.apparatus === apparatus &&
+    x.group === groupFromUrl
+  );
+
+  if (existingIndex >= 0) {
+    allSessions[existingIndex] = finalResults;
+  } else {
+    allSessions.push(finalResults);
+  }
+
+  localStorage.setItem("allFinalResults", JSON.stringify(allSessions));
+
+  localStorage.removeItem("currentScore");
+  localStorage.removeItem("currentName");
+  localStorage.removeItem("currentEntry");
+  localStorage.removeItem("currentLevel");
+  localStorage.removeItem("currentIndex");
+  localStorage.removeItem("nextIndex");
+  localStorage.removeItem("lastConfirmedScore");
+
+  window.location.replace("landing.html");
+}
