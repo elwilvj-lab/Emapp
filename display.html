@@ -3,8 +3,10 @@
 <head>
   <meta charset="UTF-8" />
 
-  <!-- Allow zoom -->
+  <!-- iPad magic -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
   <title>Score Display</title>
 
@@ -12,26 +14,45 @@
     html, body {
       margin: 0;
       padding: 0;
-      background: black;
       height: 100%;
-      overflow: hidden;
+      background: black;
       font-family: Arial, sans-serif;
+      overflow: hidden;
     }
 
     .screen {
-      width: 100vw;
-      height: 100vh;
       display: flex;
-      align-items: center;
-      justify-content: center;
+      flex-direction: column;
+      height: 100vh;
+      width: 100vw;
     }
 
     .score {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       color: white;
       font-weight: bold;
-      font-size: 20vw; /* scales automatically */
+      font-size: 22vw;
       text-align: center;
-      line-height: 1;
+    }
+
+    .enter-bar {
+      height: 60px;
+      background: #2f6fe4;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      letter-spacing: 2px;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .enter-bar:active {
+      background: #1e4fb3;
     }
   </style>
 </head>
@@ -40,8 +61,13 @@
 
   <div class="screen">
     <div id="score" class="score">0.00</div>
+
+    <div class="enter-bar" onclick="nextScore()">
+      ENTER
+    </div>
   </div>
 
   <script src="display.js"></script>
+
 </body>
 </html>

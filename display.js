@@ -3,8 +3,28 @@ function loadScore() {
   document.getElementById("score").textContent = score;
 }
 
-// load immediately
-loadScore();
+// =====================
+// ENTER ACTION (CLICK OR KEY)
+// =====================
+function nextScore() {
+  document.body.style.background = "white";
 
-// update every 500ms (so it refreshes live)
+  setTimeout(() => {
+    window.location.replace("judge.html" + window.location.search);
+  }, 60);
+}
+// =====================
+// ENTER KEY SUPPORT (KEYBOARD)
+// =====================
+document.addEventListener("keydown", function (e) {
+  if (e.key === "Enter") {
+    e.preventDefault();
+    nextScore();
+  }
+});
+
+// =====================
+// LOAD + AUTO REFRESH
+// =====================
+loadScore();
 setInterval(loadScore, 500);

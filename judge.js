@@ -25,7 +25,6 @@ document.addEventListener("DOMContentLoaded", initJudgePage);
 
 function initJudgePage() {
   restoreStateFromLocalStorage();
-  renderTable();
 
   document.getElementById("contextText").textContent =
     `${gender} | ${levelFromUrl} | ${apparatus} | ${groupFromUrl}`;
@@ -35,10 +34,10 @@ function initJudgePage() {
 
   document.getElementById("levelSelect").disabled = true;
   document.getElementById("groupSelect").disabled = true;
+
+  renderTable();
+  focusNextGymnast();
 }
-
-
-
 
 // =====================
 // RESTORE STATE
@@ -60,7 +59,7 @@ function restoreStateFromLocalStorage() {
     const prevIndex = parseInt(savedIndex, 10) - 1;
 
     if (!isNaN(prevIndex) && gymnasts[prevIndex]) {
-      gymnasts[prevIndex].score = lastConfirmedScore;
+      gymnasts[prevIndex].score = parseFloat(lastConfirmedScore).toFixed(2);
       gymnasts[prevIndex].done = true;
     }
 
@@ -117,6 +116,7 @@ function renderTable() {
             onclick="adjustScore(${index}, -0.05)">-</button>
 
           <input 
+            id="score-input-${index}"
             class="score-input ${!g.active ? "dnc-input" : ""}"
             type="number"
             step="0.05"
@@ -125,6 +125,8 @@ function renderTable() {
             value="${g.score}"
             ${!g.active ? "disabled" : ""}
             onchange="updateScore(${index}, this.value)"
+            oninput="updateScore(${index}, this.value)"
+            onkeydown="handleScoreKeydown(event, ${index})"
           >
 
           <button class="adjust-btn small"
@@ -174,6 +176,22 @@ function adjustScore(index, amount) {
 
   saveStateToLocalStorage();
   renderTable();
+
+  const input = document.getElementById(`score-input-${index}`);
+  if (input && !input.disabled) {
+    input.focus();
+    input.select();
+  }
+}
+
+// =====================
+// ENTER KEY ON SCORE BOX
+// =====================
+function handleScoreKeydown(event, index) {
+  if (event.key === "Enter") {
+    event.preventDefault();
+    showScore(index);
+  }
 }
 
 // =====================
@@ -182,16 +200,77 @@ function adjustScore(index, amount) {
 function showScore(index) {
   const g = gymnasts[index];
 
-  if (!g.score || g.score === "") {
+  if (!g.active) return;
+
+  if (g.score === "" || g.score === null || g.score === undefined) {
     alert("Enter score first");
     return;
   }
 
-  localStorage.setItem("currentScore", parseFloat(g.score).toFixed(2));
+  const cleanScore = parseFloat(g.score);
+  if (isNaN(cleanScore)) {
+    alert("Enter a valid score first");
+    return;
+  }
+
+  gymnasts[index].score = cleanScore.toFixed(2);
+  saveStateToLocalStorage();
+
+  localStorage.setItem("currentScore", cleanScore.toFixed(2));
   localStorage.setItem("currentName", g.name);
   localStorage.setItem("currentEntry", g.entry);
   localStorage.setItem("currentLevel", g.level);
   localStorage.setItem("currentIndex", index);
 
+  // these are used when display closes and judge page comes back
+  localStorage.setItem("lastConfirmedScore", cleanScore.toFixed(2));
+  localStorage.setItem("nextIndex", String(index + 1));
+
   window.location.href = "display.html";
+}
+
+// =====================
+// FOCUS NEXT ACTIVE GYMNAST
+// =====================
+function focusNextGymnast() {
+  const savedIndex = localStorage.getItem("nextIndex");
+  let startIndex = 0;
+
+  if (savedIndex !== null) {
+    const parsed = parseInt(savedIndex, 10);
+    if (!isNaN(parsed)) {
+      startIndex = parsed;
+    }
+  } else {
+    const firstUndone = gymnasts.findIndex(g => g.active && !g.done);
+    startIndex = firstUndone >= 0 ? firstUndone : 0;
+  }
+
+  let targetIndex = -1;
+
+  for (let i = startIndex; i < gymnasts.length; i++) {
+    if (gymnasts[i].active && !gymnasts[i].done) {
+      targetIndex = i;
+      break;
+    }
+  }
+
+  if (targetIndex === -1) {
+    for (let i = 0; i < gymnasts.length; i++) {
+      if (gymnasts[i].active && !gymnasts[i].done) {
+        targetIndex = i;
+        break;
+      }
+    }
+  }
+
+  if (targetIndex === -1) return;
+
+  setTimeout(() => {
+    const input = document.getElementById(`score-input-${targetIndex}`);
+    if (input && !input.disabled) {
+      input.focus();
+      input.select();
+    }
+  }, 50);
 }
